@@ -20,11 +20,7 @@ export const s3 = new AWS.S3({
 
 export async function uploadFile(data: Buffer) {
     const type = await fileType.fromBuffer(data);
-  
-    const acceptedTypes = ["image/jpeg"];
-  
-    if (type && !acceptedTypes.includes(type.mime)) throw new Error("Imagem inválida");
-  
+
     const fileName = `${randomBytes(10).toString("hex")}.${type ? type.ext : "jpeg"}`;
     
     await s3.putObject({
