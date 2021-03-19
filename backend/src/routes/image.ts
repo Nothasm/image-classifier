@@ -12,7 +12,7 @@ const router = Router();
 
 router.post("/upload", file.single("image"), wrapper(async (req, res) => {
 
-    if (!req.file) throw new Error("You nedd to select an image");
+    if (!req.file) throw new Error("You need to select an image");
 
     const imageExists = await image.findOne({ md5: md5(req.file.buffer)});
     

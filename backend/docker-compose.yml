@@ -1,19 +1,14 @@
+
 version: '3'
 
 services:
   backend:
-    build: './backend'
-    env_file: 'backend/.env'
+    build: '.'
+    env_file: '.env'
     depends_on:
       - db
     ports:
       - '3000:3000'
-  client:
-    build: './client'
-    depends_on:
-      - backend
-    ports:
-      - '8080:8080'
   db:
     image: mongo
     container_name: mongo
