@@ -1,0 +1,16 @@
+
+version: '3'
+
+services:
+  backend:
+    build: '.'
+    env_file: '.env'
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+  db:
+    image: mongo
+    container_name: mongo
+    ports:
+      - '27017:27017'
