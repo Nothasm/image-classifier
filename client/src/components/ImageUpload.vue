@@ -56,8 +56,6 @@ export default {
         }
       );
 
-      alert(JSON.stringify(res, undefined, 2))
-
       if (!res.data.error) {
         this.response = res.data;
       } else {
