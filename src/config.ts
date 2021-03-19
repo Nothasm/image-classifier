@@ -8,4 +8,4 @@ export const secretAccessKey = process.env.SECRET_ACCESS_KEY;
 export const bucket = process.env.BUCKET || "";
 export const mongoUri = process.env.MONGO_URI || "";
 export const port = process.env.SERVER_PORT;
-
+export const region = process.env.AWS_REGION;

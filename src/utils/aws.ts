@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk'
 import { randomBytes } from "crypto";
 import fileType from "file-type";
-import { accessKeyId, bucket, secretAccessKey } from '../config';
+import { accessKeyId, bucket, region, secretAccessKey } from '../config';
 
 AWS.config.update({
     accessKeyId,
@@ -10,12 +10,12 @@ AWS.config.update({
 
 export const rekognition = new AWS.Rekognition({
     apiVersion: '2016-06-27',
-    region: "us-east-2",
+    region: region,
 });
 
 export const s3 = new AWS.S3({
     signatureVersion: "v4",
-    region: "us-east-2"
+    region: region
 });
 
 export async function uploadFile(data: Buffer) {
