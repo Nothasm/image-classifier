@@ -1,21 +1,21 @@
 import AWS from 'aws-sdk'
 import { randomBytes } from "crypto";
 import fileType from "file-type";
-import { accessKeyId, bucket, region, secretAccessKey } from '../config';
+import { env } from '../config';
 
 AWS.config.update({
-    accessKeyId,
-    secretAccessKey
+  accessKeyId: env.accessKeyId,
+  secretAccessKey: env.secretAccessKey
 });
 
 export const rekognition = new AWS.Rekognition({
     apiVersion: '2016-06-27',
-    region: region,
+    region: env.region,
 });
 
 export const s3 = new AWS.S3({
     signatureVersion: "v4",
-    region: region
+    region: env.region
 });
 
 export async function uploadFile(data: Buffer) {
@@ -28,7 +28,7 @@ export async function uploadFile(data: Buffer) {
     const fileName = `${randomBytes(10).toString("hex")}.${type ? type.ext : "jpeg"}`;
     
     await s3.putObject({
-      Bucket: bucket,
+      Bucket: env.bucket,
       Key: fileName,
       Body: data,
       ContentType: type ? type.mime : "image/jpeg",
@@ -55,7 +55,7 @@ export async function uploadFile(data: Buffer) {
 
   export async function getUrlFromFileName(fileName: string): Promise<string> {
     const body = {
-      Bucket: bucket,
+      Bucket: env.bucket,
       Key: fileName,
       Expires: 1800 // in seconds
     };

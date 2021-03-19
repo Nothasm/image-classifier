@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { mongoUri } from "./config";
+import { env } from "./config";
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoUri, {
+mongoose.connect(env.mongoUri, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true

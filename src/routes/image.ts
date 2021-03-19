@@ -4,7 +4,7 @@ import multer from "multer";
 import { getUrlFromFileName, rekognition, uploadFile } from "../utils/aws";
 import md5 from "md5";
 import { image } from "../models/image";
-import { projectArn } from "../config";
+import { env } from "../config";
 
 const file = multer()
 
@@ -20,7 +20,7 @@ router.post("/upload", file.single("image"), wrapper(async (req, res) => {
 
     const analisys = await rekognition
         .detectCustomLabels({
-            ProjectVersionArn: projectArn,
+            ProjectVersionArn: env.projectArn,
             Image: {
                 Bytes: req.file.buffer
             }
